@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Study Planner Form</h2>
+        <form method="POST" action="{{ url_for('form') }}">
+            <div id="subject-container">
+                <div class="subject-item mb-4">
+                    <h5>Subject 1</h5>
+                    <div class="mb-3">
+                        <label for="subject-1" class="form-label">Subject Name</label>
+                        <input type="text" class="form-control" id="subject-1" name="subject-1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="difficulty-1" class="form-label">Difficulty Level</label>
+                        <select class="form-select" id="difficulty-1" name="difficulty-1" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-info" id="add-subject">Add Another Subject</button>
+
+            <div class="mb-3">
+                <label for="total_hours" class="form-label">Total Study Hours</label>
+                <input type="number" class="form-control" id="total_hours" name="total_hours" required min="1">
+            </div>
+
+            <div class="mb-3">
+                <label for="learning_style" class="form-label">Learning Style</label>
+                <select class="form-select" id="learning_style" name="learning_style" required>
+                    <option value="Visual">Visual</option>
+                    <option value="Auditory">Auditory</option>
+                    <option value="Kinesthetic">Kinesthetic</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="study_time" class="form-label">Preferred Study Time</label>
+                <select class="form-select" id="study_time" name="study_time" required>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Night">Night</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="break_interval" class="form-label">Break Interval (minutes)</label>
+                <input type="number" class="form-control" id="break_interval" name="break_interval" required min="1" max="60">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">Generate Schedule</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('add-subject').addEventListener('click', function() {
+            let subjectCount = document.querySelectorAll('.subject-item').length + 1;
+            let subjectContainer = document.getElementById('subject-container');
+            
+            let subjectHTML = `
+                <div class="subject-item mt-3 mb-4">
+                    <h5>Subject ${subjectCount}</h5>
+                    <div class="mb-3">
+                        <label for="subject-${subjectCount}" class="form-label">Subject Name</label>
+                        <input type="text" class="form-control" id="subject-${subjectCount}" name="subject-${subjectCount}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="difficulty-${subjectCount}" class="form-label">Difficulty Level</label>
+                        <select class="form-select" id="difficulty-${subjectCount}" name="difficulty-${subjectCount}" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            subjectContainer.insertAdjacentHTML('beforeend', subjectHTML);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
